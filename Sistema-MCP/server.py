@@ -12,7 +12,7 @@ import uvicorn
 from mcp.server.fastmcp import FastMCP
 
 ROOT = Path(os.environ.get("SISTEMA_ROOT", "/home/ubuntu/Sistema")).resolve()
-HOST = os.environ.get("SISTEMA_MCP_HOST", "127.0.0.1")
+HOST = os.environ.get("SISTEMA_MCP_HOST", "0.0.0.0")
 PORT = int(os.environ.get("SISTEMA_MCP_PORT", "8765"))
 
 mcp = FastMCP(
