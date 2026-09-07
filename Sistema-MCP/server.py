@@ -8,10 +8,11 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+import uvicorn
 from mcp.server.fastmcp import FastMCP
 
 ROOT = Path(os.environ.get("SISTEMA_ROOT", "/home/ubuntu/Sistema")).resolve()
-HOST = os.environ.get("SISTEMA_MCP_HOST", "0.0.0.0")
+HOST = os.environ.get("SISTEMA_MCP_HOST", "127.0.0.1")
 PORT = int(os.environ.get("SISTEMA_MCP_PORT", "8765"))
 
 mcp = FastMCP(
@@ -177,9 +178,5 @@ def restart_pm2(process_name: str) -> dict[str, Any]:
 
 
 if __name__ == "__main__":
-    mcp.run(
-        transport="streamable-http",
-        host=HOST,
-        port=PORT,
-        streamable_http_path="/mcp",
-    )
+    app = mcp.streamable_http_app()
+    uvicorn.run(app, host=HOST, port=PORT, log_level="info")
