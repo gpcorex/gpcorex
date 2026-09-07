@@ -31,7 +31,7 @@ Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/Sistema-MCP
 Environment=SISTEMA_ROOT=/home/ubuntu/Sistema
-Environment=SISTEMA_MCP_HOST=0.0.0.0
+Environment=SISTEMA_MCP_HOST=127.0.0.1
 Environment=SISTEMA_MCP_PORT=8765
 ExecStart=/home/ubuntu/Sistema-MCP/.venv/bin/python /home/ubuntu/Sistema-MCP/server.py
 Restart=always
@@ -47,4 +47,4 @@ sleep 2
 sudo systemctl --no-pager --full status sistema-mcp || true
 ss -ltnp | grep ':8765' || true
 
-echo "Sistema MCP instalado. Endpoint: http://<IP>:8765/mcp"
+echo "Sistema MCP instalado en localhost: http://127.0.0.1:8765/mcp"
